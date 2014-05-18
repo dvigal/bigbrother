@@ -1,0 +1,45 @@
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+
+def toolsPath = {
+    String javaHome = System.properties.getProperty("java.home");
+    assert javaHome != null
+    assert !javaHome.isEmpty()
+    File parent = new File(javaHome).getParentFile()
+    File jar = new File(parent, "lib/tools.jar")
+    assert jar.exists()
+    jar.getCanonicalPath()
+}
+
+
+dependencies {
+    compile files(toolsPath)
+    compile "com.google.guava:guava:16.0.1"
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'AnnotationProfiler', 'Implementation-Version': version
+    }
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+        }
+        resources {
+            srcDir 'src/main/resources'
+        }
+    }
+}
+
+
+
+
+
+
