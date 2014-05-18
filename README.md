@@ -22,7 +22,7 @@ A Execution something that can take a long time
 
 
 ```sh
-@com.bigbrother.core.annotation.Timer(value=MyLogger.class)
+@com.bigbrother.core.annotations.Timer(value=MyLogger.class)
 public Event findEventInDb(long id) {
   ....
   return event;
